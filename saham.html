@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,23 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0b0d;
-    --bg-elev: #121216;
-    --bg-card: #17171c;
-    --border: #26262d;
-    --border-light: #33333c;
-    --text: #e8e4d9;
-    --text-dim: #8b8678;
-    --text-muted: #5a5650;
-    --gold: #c9a94a;
-    --gold-bright: #e6c76a;
-    --up: #7dc88c;
-    --down: #e27d7d;
+    --bg: #0b0b0d; --bg-elev: #121216; --bg-card: #17171c;
+    --border: #26262d; --border-light: #33333c;
+    --text: #e8e4d9; --text-dim: #8b8678; --text-muted: #5a5650;
+    --gold: #c9a94a; --gold-bright: #e6c76a;
+    --up: #7dc88c; --down: #e27d7d;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg); color: var(--text);
     font-family: 'JetBrains Mono', monospace;
     min-height: 100vh;
     background-image:
@@ -53,17 +46,8 @@
     color: var(--text-muted); margin-top: 12px;
   }
   .status {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
     font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
-  }
-  .status-row { display: flex; align-items: center; gap: 10px; color: var(--text-dim); }
-  .pulse {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--up); animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(125, 200, 140, 0.4); }
-    50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(125, 200, 140, 0); }
+    color: var(--text-dim);
   }
   .btn-minimal {
     background: transparent; border: 1px solid var(--border-light);
@@ -71,10 +55,16 @@
     font-family: inherit; font-size: 10px;
     letter-spacing: 0.2em; text-transform: uppercase;
     cursor: pointer; transition: all 0.2s;
-    text-decoration: none; display: inline-block;
   }
   .btn-minimal:hover { border-color: var(--gold); color: var(--gold); }
-  .btn-minimal:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary {
+    background: var(--gold); color: var(--bg);
+    border: 1px solid var(--gold); padding: 8px 16px;
+    font-family: inherit; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; font-weight: 700;
+  }
+  .btn-primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
 
   nav {
     display: flex; gap: 0; margin-bottom: 40px;
@@ -89,46 +79,6 @@
   nav a:hover { color: var(--text); }
   nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-  /* Setup panel */
-  .setup-panel {
-    background: var(--bg-card); border: 1px solid var(--gold);
-    padding: 32px; margin-bottom: 32px; text-align: center;
-  }
-  .setup-panel h2 {
-    font-family: 'Fraunces', serif; font-weight: 400;
-    font-size: 22px; color: var(--gold); margin-bottom: 10px;
-  }
-  .setup-panel p {
-    color: var(--text-dim); font-size: 12px;
-    letter-spacing: 0.05em; line-height: 1.6; margin-bottom: 20px;
-  }
-  .setup-panel p a { color: var(--gold); text-decoration: none; border-bottom: 1px dashed var(--gold); }
-  .setup-form {
-    display: flex; gap: 10px; max-width: 600px; margin: 0 auto;
-    flex-wrap: wrap; justify-content: center;
-  }
-  .setup-form input {
-    flex: 1; min-width: 260px;
-    background: var(--bg); border: 1px solid var(--border-light);
-    color: var(--text); padding: 10px 14px;
-    font-family: inherit; font-size: 13px; letter-spacing: 0.05em;
-  }
-  .setup-form input:focus { outline: none; border-color: var(--gold); }
-  .btn-primary {
-    background: var(--gold); color: var(--bg);
-    border: 1px solid var(--gold); padding: 10px 20px;
-    font-family: inherit; font-size: 11px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    cursor: pointer; font-weight: 700;
-  }
-  .btn-primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
-
-  .quota-info {
-    font-size: 10px; color: var(--text-muted);
-    letter-spacing: 0.15em; margin-top: 12px;
-  }
-
-  /* Section */
   .section { margin-bottom: 48px; }
   .section-title {
     font-family: 'Fraunces', serif; font-size: 13px; font-weight: 500;
@@ -146,66 +96,21 @@
     font-size: 10px; letter-spacing: 0.2em;
   }
 
-  /* Stock grid */
-  .stock-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1px; background: var(--border); border: 1px solid var(--border);
+  /* IHSG Main Chart */
+  .tv-main-chart {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2px;
+    height: 520px;
   }
-  .stock-card {
-    background: var(--bg-card); padding: 20px;
-    transition: background 0.3s; position: relative;
-  }
-  .stock-card:hover { background: var(--bg-elev); }
-  .stock-head {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 12px;
-  }
-  .stock-ticker {
-    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500;
-    color: var(--gold); letter-spacing: 0.05em;
-  }
-  .stock-change {
-    font-size: 12px; font-weight: 700; padding: 3px 8px;
-    letter-spacing: 0.05em;
-  }
-  .stock-change.up { color: var(--up); background: rgba(125, 200, 140, 0.1); }
-  .stock-change.down { color: var(--down); background: rgba(226, 125, 125, 0.1); }
-
-  .stock-name {
-    font-size: 10px; color: var(--text-muted);
-    letter-spacing: 0.1em; margin-bottom: 14px;
-    text-transform: uppercase;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .stock-price {
-    font-size: 26px; font-weight: 500; color: var(--text);
-    margin-bottom: 4px; letter-spacing: -0.01em;
-  }
-  .stock-price-unit {
-    font-size: 10px; color: var(--text-muted);
-    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px;
-  }
-  .stock-details {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 8px; padding-top: 12px;
-    border-top: 1px dashed var(--border);
-    font-size: 11px;
-  }
-  .stock-detail-row { display: flex; justify-content: space-between; }
-  .stock-detail-label { color: var(--text-dim); }
-  .stock-detail-value { color: var(--text); font-weight: 500; }
-
-  .stock-card.loading .stock-price { color: var(--text-muted); font-size: 16px; }
-  .stock-card.error { border-left: 2px solid var(--down); }
-  .stock-card.error .stock-price { color: var(--down); font-size: 14px; }
+  .tv-main-chart > div { height: 100%; }
 
   .toolbar {
     display: flex; gap: 10px; flex-wrap: wrap;
-    margin-bottom: 16px; align-items: center;
+    margin-bottom: 20px; align-items: center;
   }
   .toolbar .add-form {
-    flex: 1; display: flex; gap: 8px; max-width: 400px;
+    display: flex; gap: 8px; flex: 1; max-width: 400px;
   }
   .toolbar input {
     flex: 1; background: var(--bg-card);
@@ -216,23 +121,155 @@
   }
   .toolbar input:focus { outline: none; border-color: var(--gold); }
 
+  /* Stock grid - Symbol Overview widget per card */
+  .stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    height: 280px;
+  }
+  .stock-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 169, 74, 0.08);
+  }
+
+  .stock-card-widget {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .stock-card-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stock-card-placeholder .ph-ticker {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gold);
+    opacity: 0.4;
+  }
+  .stock-card-placeholder .ph-loading {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
   .remove-btn {
     position: absolute; top: 8px; right: 8px;
-    background: transparent; border: none;
-    color: var(--text-muted); font-size: 16px;
+    background: rgba(11, 11, 13, 0.85);
+    border: 1px solid var(--border-light);
+    color: var(--text-dim); font-size: 14px;
     cursor: pointer; opacity: 0; transition: opacity 0.2s;
-    width: 24px; height: 24px;
+    width: 26px; height: 26px;
     display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+    border-radius: 2px;
   }
   .stock-card:hover .remove-btn { opacity: 1; }
-  .remove-btn:hover { color: var(--down); }
+  .remove-btn:hover { color: var(--down); border-color: var(--down); }
 
-  .error-banner {
-    color: var(--down); font-size: 12px;
-    padding: 12px 20px; background: rgba(226, 125, 125, 0.08);
-    border: 1px solid rgba(226, 125, 125, 0.2);
-    margin-bottom: 16px;
+  .click-hint {
+    position: absolute;
+    bottom: 6px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(11, 11, 13, 0.85);
+    color: var(--text-dim);
+    padding: 3px 10px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 5;
+    border: 1px solid var(--border-light);
   }
+  .stock-card:hover .click-hint { opacity: 1; }
+
+  /* MODAL — fixed sizing */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--gold);
+    width: 100%;
+    max-width: 1200px;
+    height: 88vh;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .modal-head {
+    flex: 0 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+  }
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .modal-close {
+    background: transparent; border: 1px solid var(--border-light);
+    color: var(--text-dim); font-size: 14px;
+    cursor: pointer; padding: 6px 14px;
+    font-family: inherit; letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .modal-close:hover { color: var(--down); border-color: var(--down); }
+
+  .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+  }
+  #tv-modal-chart {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .info-banner {
+    background: rgba(201, 169, 74, 0.05);
+    border: 1px solid rgba(201, 169, 74, 0.3);
+    padding: 14px 20px; margin-bottom: 24px;
+    font-size: 11px; color: var(--text-dim);
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+  .info-banner b { color: var(--gold); }
+  .info-banner a { color: var(--gold); text-decoration: none; border-bottom: 1px dashed; }
 
   footer {
     margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border);
@@ -245,7 +282,9 @@
   @media (max-width: 640px) {
     body { padding: 16px; }
     nav a { padding: 12px 16px; font-size: 10px; letter-spacing: 0.15em; }
-    .setup-form input { min-width: 200px; }
+    .tv-main-chart { height: 400px; }
+    .modal { max-width: 100%; height: 92vh; }
+    .stock-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -255,17 +294,10 @@
     <header>
       <div class="brand">
         <h1><span>Saham</span> Indonesia</h1>
-        <div class="subtitle">IDX · Real-time · Powered by Twelve Data</div>
+        <div class="subtitle">IDX · Real-time · Powered by TradingView</div>
       </div>
       <div class="status">
-        <div class="status-row">
-          <span class="pulse" id="statusPulse"></span>
-          <span id="lastUpdate">Menunggu setup...</span>
-        </div>
-        <div class="status-row">
-          <button class="btn-minimal" id="refreshBtn" disabled>⟳ Refresh</button>
-          <button class="btn-minimal" id="changeKeyBtn" style="display:none;">API Key</button>
-        </div>
+        <span>● Live · Klik kartu saham untuk chart full dengan indicator</span>
       </div>
     </header>
 
@@ -274,55 +306,59 @@
       <a href="saham.html" class="active">Saham Indonesia</a>
     </nav>
 
-    <!-- Setup panel -->
-    <div class="setup-panel" id="setupPanel">
-      <h2>Setup API Key</h2>
-      <p>
-        Halaman ini menggunakan <a href="https://twelvedata.com/pricing" target="_blank">Twelve Data API</a>
-        untuk data saham IDX real-time.<br>
-        Daftar gratis dan dapatkan API key di
-        <a href="https://twelvedata.com/register" target="_blank">twelvedata.com/register</a> — cukup sekali, tersimpan di browser.
-      </p>
-      <div class="setup-form">
-        <input type="text" id="apiKeyInput" placeholder="Masukkan API key di sini..." autocomplete="off">
-        <button class="btn-primary" id="saveKeyBtn">Simpan & Muat Data</button>
-      </div>
-      <div class="quota-info">
-        Free tier: 800 request/hari · 8 request/menit · Cukup untuk monitoring pribadi
-      </div>
+    <div class="info-banner">
+      💡 <b>Tips:</b> Setiap kartu menampilkan harga terkini, % perubahan hari ini, dan mini chart.
+      Klik kartu untuk melihat chart full dengan candlestick, indicator (RSI, MA), dan analisis teknikal lengkap.<br>
+      Jam trading IDX: <b>Senin-Jumat 09:00-16:00 WIB</b>. Di luar jam ini menampilkan data penutupan terakhir.
     </div>
 
-    <!-- Dashboard -->
-    <div id="dashboard" style="display:none;">
-      <section class="section">
-        <h2 class="section-title">
-          Watchlist Saham
-          <span class="count" id="stockCount">—</span>
-        </h2>
+    <section class="section">
+      <h2 class="section-title">
+        IHSG — Indeks Harga Saham Gabungan
+        <span class="count">IDX COMPOSITE · Real-time</span>
+      </h2>
+      <div class="tv-main-chart">
+        <div id="tv-ihsg-chart" style="height:100%;width:100%"></div>
+      </div>
+    </section>
 
-        <div class="toolbar">
-          <div class="add-form">
-            <input type="text" id="addTicker" placeholder="Tambah ticker (contoh: ANTM)" maxlength="10">
-            <button class="btn-minimal" id="addBtn">+ Tambah</button>
-          </div>
-          <button class="btn-minimal" id="resetBtn">↺ Reset Default</button>
+    <section class="section">
+      <h2 class="section-title">
+        Watchlist Saham
+        <span class="count" id="stockCount">—</span>
+      </h2>
+
+      <div class="toolbar">
+        <div class="add-form">
+          <input type="text" id="addTicker" placeholder="Tambah ticker (contoh: ANTM)" maxlength="10">
+          <button class="btn-primary" id="addBtn">+ Tambah</button>
         </div>
+        <button class="btn-minimal" id="resetBtn">↺ Reset Default</button>
+      </div>
 
-        <div id="errorBanner"></div>
-
-        <div class="stock-grid" id="stockGrid"></div>
-      </section>
-    </div>
+      <div class="stock-grid" id="stockGrid"></div>
+    </section>
 
     <footer>
-      Data: <a href="https://twelvedata.com" target="_blank">Twelve Data</a>
-      &nbsp;·&nbsp; Refresh manual (hemat kuota)
+      Data & Charts oleh <a href="https://www.tradingview.com" target="_blank">TradingView</a>
+      &nbsp;·&nbsp; Tidak butuh API key
     </footer>
 
   </div>
 
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-head">
+        <div class="modal-title" id="modalTitle">—</div>
+        <button class="modal-close" id="modalClose">✕ Tutup</button>
+      </div>
+      <div class="modal-body">
+        <div id="tv-modal-chart"></div>
+      </div>
+    </div>
+  </div>
+
 <script>
-  // Default watchlist - saham populer IDX
   const DEFAULT_STOCKS = [
     { ticker: 'BBCA', name: 'Bank Central Asia' },
     { ticker: 'BBRI', name: 'Bank Rakyat Indonesia' },
@@ -338,245 +374,244 @@
     { ticker: 'GOTO', name: 'GoTo Gojek Tokopedia' },
   ];
 
-  const STORAGE_KEY_API = 'twelve_data_api_key';
-  const STORAGE_KEY_LIST = 'saham_watchlist';
+  const STORAGE_KEY = 'saham_watchlist_v3';
+  let watchlist = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || DEFAULT_STOCKS;
 
-  let apiKey = localStorage.getItem(STORAGE_KEY_API);
-  let watchlist = JSON.parse(localStorage.getItem(STORAGE_KEY_LIST) || 'null') || DEFAULT_STOCKS;
-
-  // Formatters
-  const fmtIDR = n => n == null ? '—' : 'Rp ' + Math.round(n).toLocaleString('id-ID');
-  const fmtPct = n => n == null ? '—' : (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
-  const fmtVol = n => {
-    if (n == null) return '—';
-    if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
-    if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
-    if (n >= 1e3) return (n / 1e3).toFixed(2) + 'K';
-    return n.toLocaleString('id-ID');
-  };
-
-  // Fetch single stock quote
-  async function fetchQuote(ticker) {
-    // Twelve Data format: BBCA.IDX or BBCA:IDX. We use :IDX
-    const url = `https://api.twelvedata.com/quote?symbol=${encodeURIComponent(ticker)}&exchange=IDX&apikey=${apiKey}`;
-    const r = await fetch(url);
-    const data = await r.json();
-    if (data.code === 401 || data.code === 403) throw new Error('API_KEY_INVALID');
-    if (data.code === 429) throw new Error('RATE_LIMIT');
-    if (data.status === 'error') throw new Error(data.message || 'API Error');
-    return data;
+  function saveWatchlist() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlist));
   }
 
-  function renderStockCard(stock, state) {
-    const { ticker, name } = stock;
-    if (state.loading) {
-      return `
-        <div class="stock-card loading" data-ticker="${ticker}">
-          <button class="remove-btn" data-remove="${ticker}" title="Hapus">×</button>
-          <div class="stock-head">
-            <div class="stock-ticker">${ticker}</div>
-          </div>
-          <div class="stock-name">${name}</div>
-          <div class="stock-price">Memuat...</div>
-        </div>
-      `;
-    }
-    if (state.error) {
-      return `
-        <div class="stock-card error" data-ticker="${ticker}">
-          <button class="remove-btn" data-remove="${ticker}" title="Hapus">×</button>
-          <div class="stock-head">
-            <div class="stock-ticker">${ticker}</div>
-          </div>
-          <div class="stock-name">${name}</div>
-          <div class="stock-price">${state.error}</div>
-        </div>
-      `;
-    }
-    const d = state.data;
-    const price = parseFloat(d.close || d.price);
-    const change = parseFloat(d.change);
-    const pctChange = parseFloat(d.percent_change);
-    const direction = pctChange >= 0 ? 'up' : 'down';
-    const arrow = pctChange >= 0 ? '▲' : '▼';
-    const fullName = d.name || name;
+  /**
+   * Helper untuk bikin TradingView widget secara dinamis.
+   * Menggunakan script.text (bukan innerHTML) agar parse JSON config-nya benar.
+   */
+  function injectTradingViewWidget(targetEl, scriptSrc, config) {
+    targetEl.innerHTML = '';
 
-    return `
-      <div class="stock-card" data-ticker="${ticker}">
-        <button class="remove-btn" data-remove="${ticker}" title="Hapus">×</button>
-        <div class="stock-head">
-          <div class="stock-ticker">${ticker}</div>
-          <div class="stock-change ${direction}">${arrow} ${fmtPct(pctChange)}</div>
-        </div>
-        <div class="stock-name">${fullName}</div>
-        <div class="stock-price">${fmtIDR(price)}</div>
-        <div class="stock-price-unit">IDR per saham</div>
-        <div class="stock-details">
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">Change</span>
-            <span class="stock-detail-value ${direction}">${change >= 0 ? '+' : ''}${Math.round(change).toLocaleString('id-ID')}</span>
-          </div>
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">Volume</span>
-            <span class="stock-detail-value">${fmtVol(parseFloat(d.volume))}</span>
-          </div>
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">Open</span>
-            <span class="stock-detail-value">${fmtIDR(parseFloat(d.open))}</span>
-          </div>
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">Prev Close</span>
-            <span class="stock-detail-value">${fmtIDR(parseFloat(d.previous_close))}</span>
-          </div>
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">High</span>
-            <span class="stock-detail-value">${fmtIDR(parseFloat(d.high))}</span>
-          </div>
-          <div class="stock-detail-row">
-            <span class="stock-detail-label">Low</span>
-            <span class="stock-detail-value">${fmtIDR(parseFloat(d.low))}</span>
-          </div>
-        </div>
-      </div>
-    `;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'tradingview-widget-container';
+    wrapper.style.height = '100%';
+    wrapper.style.width = '100%';
+
+    const inner = document.createElement('div');
+    inner.className = 'tradingview-widget-container__widget';
+    inner.style.height = 'calc(100% - 0px)';
+    inner.style.width = '100%';
+    wrapper.appendChild(inner);
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = scriptSrc;
+    script.async = true;
+    script.text = JSON.stringify(config);
+    wrapper.appendChild(script);
+
+    targetEl.appendChild(wrapper);
   }
 
-  function renderGrid(states) {
+  // IHSG Main Chart - Advanced Chart
+  function loadIhsgChart() {
+    injectTradingViewWidget(
+      document.getElementById('tv-ihsg-chart'),
+      'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js',
+      {
+        "autosize": true,
+        "symbol": "IDX:COMPOSITE",
+        "interval": "D",
+        "timezone": "Asia/Jakarta",
+        "theme": "dark",
+        "style": "1",
+        "locale": "id",
+        "toolbar_bg": "#17171c",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "backgroundColor": "#17171c",
+        "gridColor": "rgba(38, 38, 45, 0.5)",
+        "withdateranges": true,
+        "studies": ["STD;SMA"],
+        "show_popup_button": true,
+        "popup_width": "1200",
+        "popup_height": "700"
+      }
+    );
+  }
+
+  /**
+   * Symbol Overview widget - menampilkan harga + % change + mini chart
+   * Ini widget yang tepat untuk grid card.
+   */
+  function loadStockCardWidget(containerId, ticker) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Remove placeholder once we start injecting
+    const ph = container.parentElement.querySelector('.stock-card-placeholder');
+    if (ph) ph.style.display = 'none';
+
+    injectTradingViewWidget(
+      container,
+      'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js',
+      {
+        "symbols": [[`IDX:${ticker}|3M`]],
+        "chartOnly": false,
+        "width": "100%",
+        "height": "100%",
+        "locale": "id",
+        "colorTheme": "dark",
+        "autosize": true,
+        "showVolume": false,
+        "showMA": false,
+        "hideDateRanges": false,
+        "hideMarketStatus": false,
+        "hideSymbolLogo": false,
+        "scalePosition": "right",
+        "scaleMode": "Normal",
+        "fontFamily": "'JetBrains Mono', monospace",
+        "fontSize": "10",
+        "noTimeScale": true,
+        "valuesTracking": "1",
+        "changeMode": "price-and-percent",
+        "chartType": "area",
+        "headerFontSize": "medium",
+        "lineColor": "rgba(201, 169, 74, 1)",
+        "topColor": "rgba(201, 169, 74, 0.3)",
+        "bottomColor": "rgba(201, 169, 74, 0)",
+        "lineWidth": 2,
+        "isTransparent": true,
+        "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"]
+      }
+    );
+  }
+
+  function renderGrid() {
     const grid = document.getElementById('stockGrid');
-    grid.innerHTML = watchlist.map(s => renderStockCard(s, states[s.ticker] || { loading: true })).join('');
+    grid.innerHTML = watchlist.map(s => `
+      <div class="stock-card" data-ticker="${s.ticker}" data-name="${s.name}">
+        <button class="remove-btn" data-remove="${s.ticker}" title="Hapus">×</button>
+        <div class="stock-card-placeholder">
+          <div class="ph-ticker">${s.ticker}</div>
+          <div class="ph-loading">Memuat chart...</div>
+        </div>
+        <div class="stock-card-widget" id="widget-${s.ticker}"></div>
+        <div class="click-hint">Klik untuk chart lengkap</div>
+      </div>
+    `).join('');
+
     document.getElementById('stockCount').textContent = `${watchlist.length} saham`;
 
-    // Attach remove listeners
+    // Load widgets dengan staggered delay untuk menghindari rate limit di TradingView
+    watchlist.forEach((s, i) => {
+      setTimeout(() => loadStockCardWidget(`widget-${s.ticker}`, s.ticker), i * 150);
+    });
+
+    // Card click -> open modal
+    grid.querySelectorAll('.stock-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.remove-btn')) return;
+        const ticker = card.dataset.ticker;
+        const name = card.dataset.name;
+        openModal(ticker, name);
+      });
+    });
+
+    // Remove buttons
     grid.querySelectorAll('[data-remove]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const ticker = btn.dataset.remove;
-        removeStock(ticker);
+        removeStock(btn.dataset.remove);
       });
     });
   }
 
-  async function loadAll() {
-    document.getElementById('lastUpdate').textContent = 'Memperbarui...';
-    document.getElementById('refreshBtn').disabled = true;
-    document.getElementById('errorBanner').innerHTML = '';
+  function openModal(ticker, name) {
+    document.getElementById('modalTitle').textContent = `${ticker} — ${name}`;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
 
-    const states = {};
-    // Initial render (loading)
-    watchlist.forEach(s => states[s.ticker] = { loading: true });
-    renderGrid(states);
-
-    let hitRateLimit = false;
-    let invalidKey = false;
-
-    // Batch: max 8 per menit. Untuk kesederhanaan, delay 200ms antar request.
-    for (const stock of watchlist) {
-      try {
-        const data = await fetchQuote(stock.ticker);
-        states[stock.ticker] = { data };
-      } catch (err) {
-        if (err.message === 'API_KEY_INVALID') { invalidKey = true; break; }
-        if (err.message === 'RATE_LIMIT') { hitRateLimit = true; break; }
-        states[stock.ticker] = { error: 'Error: ' + err.message };
-      }
-      renderGrid(states);
-      await new Promise(r => setTimeout(r, 200));
-    }
-
-    if (invalidKey) {
-      document.getElementById('errorBanner').innerHTML =
-        '<div class="error-banner">API Key tidak valid. Klik tombol "API Key" di pojok kanan atas untuk update.</div>';
-    } else if (hitRateLimit) {
-      document.getElementById('errorBanner').innerHTML =
-        '<div class="error-banner">Rate limit tercapai (8 req/menit). Tunggu 1 menit lalu refresh lagi.</div>';
-    }
-
-    const now = new Date();
-    document.getElementById('lastUpdate').textContent = 'Diperbarui ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('refreshBtn').disabled = false;
+    // Inject widget AFTER modal is visible, so parent has real dimensions
+    requestAnimationFrame(() => {
+      injectTradingViewWidget(
+        document.getElementById('tv-modal-chart'),
+        'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js',
+        {
+          "autosize": true,
+          "symbol": `IDX:${ticker}`,
+          "interval": "D",
+          "timezone": "Asia/Jakarta",
+          "theme": "dark",
+          "style": "1",
+          "locale": "id",
+          "toolbar_bg": "#17171c",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "backgroundColor": "#17171c",
+          "gridColor": "rgba(38, 38, 45, 0.5)",
+          "withdateranges": true,
+          "hide_side_toolbar": false,
+          "studies": ["STD;SMA", "STD;RSI"]
+        }
+      );
+    });
   }
 
-  function showDashboard() {
-    document.getElementById('setupPanel').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('changeKeyBtn').style.display = 'inline-block';
-    document.getElementById('refreshBtn').disabled = false;
-    loadAll();
-  }
-
-  function showSetup() {
-    document.getElementById('setupPanel').style.display = 'block';
-    document.getElementById('dashboard').style.display = 'none';
-    document.getElementById('changeKeyBtn').style.display = 'none';
-    document.getElementById('refreshBtn').disabled = true;
-    document.getElementById('lastUpdate').textContent = 'Menunggu setup...';
-    if (apiKey) document.getElementById('apiKeyInput').value = apiKey;
-  }
-
-  function saveWatchlist() {
-    localStorage.setItem(STORAGE_KEY_LIST, JSON.stringify(watchlist));
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('tv-modal-chart').innerHTML = '';
   }
 
   function addStock(ticker) {
     ticker = ticker.trim().toUpperCase();
     if (!ticker) return;
+    if (!/^[A-Z]{1,10}$/.test(ticker)) {
+      alert('Ticker hanya boleh berisi huruf (A-Z)');
+      return;
+    }
     if (watchlist.some(s => s.ticker === ticker)) {
       alert('Saham ' + ticker + ' sudah ada di watchlist');
       return;
     }
     watchlist.push({ ticker, name: ticker });
     saveWatchlist();
-    loadAll();
+    renderGrid();
   }
 
   function removeStock(ticker) {
     watchlist = watchlist.filter(s => s.ticker !== ticker);
     saveWatchlist();
-    loadAll();
+    renderGrid();
   }
 
   function resetDefault() {
-    if (!confirm('Reset watchlist ke default?')) return;
+    if (!confirm('Reset watchlist ke daftar default?')) return;
     watchlist = DEFAULT_STOCKS.slice();
     saveWatchlist();
-    loadAll();
+    renderGrid();
   }
 
   // Event listeners
-  document.getElementById('saveKeyBtn').addEventListener('click', () => {
-    const v = document.getElementById('apiKeyInput').value.trim();
-    if (!v) { alert('API Key tidak boleh kosong'); return; }
-    apiKey = v;
-    localStorage.setItem(STORAGE_KEY_API, apiKey);
-    showDashboard();
-  });
-
-  document.getElementById('apiKeyInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') document.getElementById('saveKeyBtn').click();
-  });
-
-  document.getElementById('refreshBtn').addEventListener('click', loadAll);
-
-  document.getElementById('changeKeyBtn').addEventListener('click', showSetup);
-
   document.getElementById('addBtn').addEventListener('click', () => {
     const input = document.getElementById('addTicker');
     addStock(input.value);
     input.value = '';
   });
-
   document.getElementById('addTicker').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') document.getElementById('addBtn').click();
   });
-
   document.getElementById('resetBtn').addEventListener('click', resetDefault);
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('modalOverlay').classList.contains('active')) {
+      closeModal();
+    }
+  });
 
   // Init
-  if (apiKey) {
-    showDashboard();
-  } else {
-    showSetup();
-  }
+  loadIhsgChart();
+  renderGrid();
 </script>
 </body>
 </html>
