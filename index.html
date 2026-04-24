@@ -10,24 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0b0d;
-    --bg-elev: #121216;
-    --bg-card: #17171c;
-    --border: #26262d;
-    --border-light: #33333c;
-    --text: #e8e4d9;
-    --text-dim: #8b8678;
-    --text-muted: #5a5650;
-    --gold: #c9a94a;
-    --gold-bright: #e6c76a;
-    --up: #7dc88c;
-    --down: #e27d7d;
-    --warn: #d4a54a;
+    --bg: #0b0b0d; --bg-elev: #121216; --bg-card: #17171c;
+    --border: #26262d; --border-light: #33333c;
+    --text: #e8e4d9; --text-dim: #8b8678; --text-muted: #5a5650;
+    --gold: #c9a94a; --gold-bright: #e6c76a;
+    --up: #7dc88c; --down: #e27d7d; --warn: #d4a54a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg); color: var(--text);
     font-family: 'JetBrains Mono', monospace;
     min-height: 100vh;
     background-image:
@@ -79,7 +70,7 @@
   .btn-minimal:disabled { opacity: 0.4; cursor: not-allowed; }
 
   nav {
-    display: flex; gap: 0; margin-bottom: 40px;
+    display: flex; gap: 0; margin-bottom: 24px;
     border-bottom: 1px solid var(--border);
   }
   nav a {
@@ -90,6 +81,17 @@
   }
   nav a:hover { color: var(--text); }
   nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* Weekend warning */
+  .weekend-warn {
+    background: rgba(212, 165, 74, 0.08);
+    border: 1px solid var(--warn);
+    color: var(--warn);
+    padding: 12px 20px; margin-bottom: 32px;
+    font-size: 11px; letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .weekend-warn b { font-weight: 700; }
 
   .section { margin-bottom: 48px; }
   .section-title {
@@ -109,15 +111,11 @@
   }
 
   .estimate-badge {
-    display: inline-block;
-    padding: 3px 8px;
+    display: inline-block; padding: 3px 8px;
     background: rgba(212, 165, 74, 0.15);
-    border: 1px solid var(--warn);
-    color: var(--warn);
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 700;
+    border: 1px solid var(--warn); color: var(--warn);
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; font-weight: 700;
   }
 
   .antam-card {
@@ -155,9 +153,29 @@
   .antam-item .sub {
     font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 4px;
   }
+
+  .antam-settings {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    position: relative; z-index: 1;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .antam-settings label {
+    font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .antam-settings input {
+    background: var(--bg); border: 1px solid var(--border-light);
+    color: var(--text); padding: 6px 10px;
+    font-family: inherit; font-size: 12px; width: 80px;
+    text-align: center;
+  }
+  .antam-settings input:focus { outline: none; border-color: var(--gold); }
+
   .antam-note {
     font-size: 11px; color: var(--text-dim);
-    margin-top: 10px; line-height: 1.5;
+    margin-top: 14px; line-height: 1.6;
+    position: relative; z-index: 1;
   }
   .antam-note a {
     color: var(--gold); text-decoration: none;
@@ -227,6 +245,16 @@
   .crypto-change.up { color: var(--up); }
   .crypto-change.down { color: var(--down); }
 
+  /* TradingView chart container */
+  .tv-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2px;
+    height: 500px;
+    position: relative;
+  }
+  .tv-wrapper > div { height: 100%; }
+
   .loading { color: var(--text-muted); font-size: 11px; letter-spacing: 0.2em; }
   .loading::after { content: '...'; animation: dots 1.5s infinite; }
   @keyframes dots {
@@ -255,6 +283,7 @@
     .crypto-row, .crypto-head { grid-template-columns: 100px 1fr 90px; gap: 10px; }
     .crypto-row > :nth-child(3), .crypto-head > :nth-child(3) { display: none; }
     .antam-item .value { font-size: 20px; }
+    .tv-wrapper { height: 400px; }
   }
 </style>
 </head>
@@ -284,10 +313,19 @@
       <a href="saham.html">Saham Indonesia</a>
     </nav>
 
+    <div class="weekend-warn" id="weekendWarn" style="display:none;">
+      <span>⚠️</span>
+      <div>
+        <b>Market Emas Dunia Tutup (Weekend)</b> —
+        Pasar emas LBMA tutup Sabtu-Minggu. Harga yang ditampilkan adalah penutupan Jumat terakhir.
+        Antam juga tidak update harga di weekend. Data akan fresh lagi Senin pagi.
+      </div>
+    </div>
+
     <section class="section">
       <h2 class="section-title">
         Emas Antam (Estimasi)
-        <span class="count">Berdasarkan Spot Gold + Premium</span>
+        <span class="count">Dari Spot Gold + Premium</span>
       </h2>
       <div class="antam-card">
         <div class="antam-head">
@@ -298,12 +336,12 @@
           <div class="antam-item">
             <div class="label">Harga Jual / Gram</div>
             <div class="value" id="antamSell">—</div>
-            <div class="sub">Spot + premium ~8.5%</div>
+            <div class="sub">Spot + premium jual</div>
           </div>
           <div class="antam-item">
             <div class="label">Harga Buyback / Gram</div>
             <div class="value" id="antamBuy">—</div>
-            <div class="sub">Spot − diskon ~0.5%</div>
+            <div class="sub">Spot + premium buyback</div>
           </div>
           <div class="antam-item">
             <div class="label">Spot Gold / Gram (IDR)</div>
@@ -313,14 +351,24 @@
           <div class="antam-item">
             <div class="label">Estimasi Spread</div>
             <div class="value" id="antamSpread" style="color: var(--text);">—</div>
-            <div class="sub">Selisih jual vs buyback</div>
+            <div class="sub">Jual − buyback</div>
           </div>
         </div>
+
+        <div class="antam-settings">
+          <label>Premium Jual (%)</label>
+          <input type="number" id="premiumSell" step="0.5" min="0" max="30">
+          <label>Premium Buyback (%)</label>
+          <input type="number" id="premiumBuy" step="0.5" min="-10" max="10">
+          <button class="btn-minimal" id="saveSettings">💾 Simpan</button>
+          <button class="btn-minimal" id="resetSettings">↺ Default</button>
+        </div>
+
         <div class="antam-note">
-          💡 <b>Catatan:</b> Angka ini adalah <i>estimasi</i> berdasarkan harga emas dunia dikalikan kurs USD/IDR, ditambah premium rata-rata Antam (~8.5%).
-          Untuk harga resmi akurat, cek langsung di
-          <a href="https://www.logammulia.com/id/harga-emas-hari-ini" target="_blank">logammulia.com</a>
-          atau <a href="https://harga-emas.org" target="_blank">harga-emas.org</a>.
+          💡 <b>Cara tuning:</b> Buka <a href="https://www.logammulia.com/id/harga-emas-hari-ini" target="_blank">logammulia.com</a>,
+          catat harga Jual & Buyback hari ini, lalu sesuaikan premium di atas.<br>
+          Formula: <b>Premium Jual %</b> = ((Harga_Jual_Antam / Spot_Gold_IDR) − 1) × 100.
+          Default: Jual +8.5%, Buyback +1.5% (sesuai kondisi April 2026).
         </div>
       </div>
     </section>
@@ -384,10 +432,23 @@
       </div>
     </section>
 
+    <section class="section">
+      <h2 class="section-title">
+        Bitcoin Chart — Live
+        <span class="count">BTC/USDT · Powered by TradingView</span>
+      </h2>
+      <div class="tv-wrapper">
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div id="tv-btc-chart" style="height:100%;width:100%"></div>
+        </div>
+      </div>
+    </section>
+
     <footer>
       Data: <a href="https://gold-api.com" target="_blank">gold-api.com</a> ·
       <a href="https://open.er-api.com" target="_blank">er-api</a> ·
-      <a href="https://www.coingecko.com" target="_blank">CoinGecko</a>
+      <a href="https://www.coingecko.com" target="_blank">CoinGecko</a> ·
+      <a href="https://www.tradingview.com" target="_blank">TradingView</a>
       &nbsp;·&nbsp; Refresh 5 menit
     </footer>
 
@@ -397,9 +458,9 @@
   const REFRESH_INTERVAL = 5 * 60 * 1000;
   const GRAMS_PER_OZ = 31.1034768;
 
-  // Premium Antam rata-rata (bisa kamu ubah sesuai data terkini)
-  const ANTAM_PREMIUM = 0.085;     // 8.5% di atas spot gold
-  const ANTAM_BUYBACK_DISCOUNT = 0.005; // 0.5% di bawah spot gold
+  // Default premium
+  const DEFAULT_PREMIUM_SELL = 8.5;   // 8.5%
+  const DEFAULT_PREMIUM_BUY  = 1.5;   // 1.5% (di atas spot, karena Antam buyback ternyata lebih mendekati spot)
 
   const METALS = ['XAU', 'XAG'];
 
@@ -445,7 +506,6 @@
     const map = {};
     METALS.forEach((m, i) => {
       map[m] = results[i].status === 'fulfilled' ? results[i].value.price : null;
-      if (results[i].status === 'rejected') console.error('Gagal fetch', m, results[i].reason);
     });
     return map;
   }
@@ -461,6 +521,12 @@
     return fetchJson(url);
   }
 
+  function getPremiumSettings() {
+    const sell = parseFloat(localStorage.getItem('antam_premium_sell')) || DEFAULT_PREMIUM_SELL;
+    const buy  = parseFloat(localStorage.getItem('antam_premium_buy'))  || DEFAULT_PREMIUM_BUY;
+    return { sell, buy };
+  }
+
   function renderAntam(xauUsd, usdToIdr) {
     if (xauUsd == null || usdToIdr == null) {
       ['antamSell','antamBuy','antamSpot','antamSpread'].forEach(id => {
@@ -468,10 +534,10 @@
       });
       return;
     }
-    // Spot gold per gram in IDR
+    const { sell: premSell, buy: premBuy } = getPremiumSettings();
     const spotPerGramIdr = (xauUsd / GRAMS_PER_OZ) * usdToIdr;
-    const sell = spotPerGramIdr * (1 + ANTAM_PREMIUM);
-    const buy  = spotPerGramIdr * (1 - ANTAM_BUYBACK_DISCOUNT);
+    const sell = spotPerGramIdr * (1 + premSell / 100);
+    const buy  = spotPerGramIdr * (1 + premBuy / 100);
     const spread = sell - buy;
 
     document.getElementById('antamSell').textContent = fmtIDR(sell);
@@ -560,6 +626,69 @@
     }).join('');
   }
 
+  function showWeekendWarning() {
+    const day = new Date().getDay(); // 0 = Sunday, 6 = Saturday
+    if (day === 0 || day === 6) {
+      document.getElementById('weekendWarn').style.display = 'flex';
+    }
+  }
+
+  function loadBtcChart() {
+    // TradingView Advanced Chart widget untuk Bitcoin
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+      "autosize": true,
+      "symbol": "BINANCE:BTCUSDT",
+      "interval": "D",
+      "timezone": "Asia/Jakarta",
+      "theme": "dark",
+      "style": "1",
+      "locale": "id",
+      "toolbar_bg": "#17171c",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "hide_side_toolbar": false,
+      "backgroundColor": "#17171c",
+      "gridColor": "rgba(38, 38, 45, 0.5)",
+      "withdateranges": true,
+      "details": false,
+      "hotlist": false,
+      "calendar": false,
+      "studies": [],
+      "show_popup_button": true,
+      "popup_width": "1000",
+      "popup_height": "650"
+    });
+    document.getElementById('tv-btc-chart').appendChild(script);
+  }
+
+  function loadSettings() {
+    const { sell, buy } = getPremiumSettings();
+    document.getElementById('premiumSell').value = sell;
+    document.getElementById('premiumBuy').value = buy;
+  }
+
+  document.getElementById('saveSettings').addEventListener('click', () => {
+    const sell = parseFloat(document.getElementById('premiumSell').value);
+    const buy  = parseFloat(document.getElementById('premiumBuy').value);
+    if (isNaN(sell) || isNaN(buy)) {
+      alert('Premium harus berupa angka'); return;
+    }
+    localStorage.setItem('antam_premium_sell', sell);
+    localStorage.setItem('antam_premium_buy', buy);
+    loadAll();
+  });
+
+  document.getElementById('resetSettings').addEventListener('click', () => {
+    if (!confirm('Reset premium ke default (Jual 8.5%, Buyback 1.5%)?')) return;
+    localStorage.removeItem('antam_premium_sell');
+    localStorage.removeItem('antam_premium_buy');
+    loadSettings();
+    loadAll();
+  });
+
   let countdownTimer = null;
   let countdownValue = 0;
 
@@ -576,7 +705,6 @@
     const crypto = cryptoRes.status === 'fulfilled' ? cryptoRes.value : null;
     const usdToIdr = rates ? rates.IDR : null;
 
-    // Antam estimasi dari spot gold + kurs USD/IDR
     renderAntam(metals.XAU, usdToIdr);
     renderMetals(metals, usdToIdr);
     renderForex(rates);
@@ -610,6 +738,11 @@
   }
 
   document.getElementById('refreshBtn').addEventListener('click', loadAll);
+
+  // Init
+  showWeekendWarning();
+  loadSettings();
+  loadBtcChart();
   loadAll();
 </script>
 </body>
